@@ -5,7 +5,6 @@ REGOLE
 - Cerca solo cose non viste a lezione. Tutto il necessario è già stato spiegato stamattina.
 */
 
-const { split } = require("animejs");
 
 /* ESERCIZIO 1 — area
    Funzione area(l1, l2) che ritorna l1 * l2.
@@ -15,7 +14,7 @@ const { split } = require("animejs");
 function area (l1, l2) {
 return l1*l2; 
 }
-console.log ("area(3, 4):", area(3, 4)); 
+console.log ("area(3, 4):", area(3, 4));
 
 /* ESERCIZIO 2 — sommaPazza
    Funzione sommaPazza(a, b): ritorna a + b.
@@ -41,7 +40,7 @@ console.log("sommaPazza(4, 4):", sommaPazza(4, 4));
 function distanzaDa19(n) {
 const distanza = Math.abs(n - 19);
 if (n>19) 
-   return distanza*3
+   return distanza * 3;
 }
 console.log("Esercizio 3 — distanzaDa19(5):", distanzaDa19(5));
 console.log("Esercizio 3 — distanzaDa19(25):", distanzaDa19(25));
@@ -52,8 +51,8 @@ console.log("Esercizio 3 — distanzaDa19(25):", distanzaDa19(25));
 */
 
 function dentroIntervallo(n) {
-   if (n>=20 && n<=100) return true n===400;
-}
+    return (n >= 20 && n <= 100) || n === 400;}
+    
 console.log("dentroIntervallo(50):", dentroIntervallo(50));
 console.log("dentroIntervallo(150):", dentroIntervallo(150));
 console.log("dentroIntervallo(400):", dentroIntervallo(400));
@@ -87,8 +86,14 @@ console.log("divisibilePer3o7(-21):", divisibilePer3o7(-21));
 */
 
 function invertiStringa(testo) {
-   split ("")
+    const lettere = testo.split(""); 
+    let inversa = "";
+    for (let i = lettere.length - 1; i >= 0; i--) {
+        inversa += lettere[i]; 
+    }
+    return inversa;
 }
+console.log("invertiStringa('EPICODE'):", invertiStringa("EPICODE"));
 
 /* ESERCIZIO 8 — inizialiMaiuscole
    Funzione inizialiMaiuscole(frase): metti in maiuscolo la prima lettera di ogni parola.
@@ -96,21 +101,42 @@ function invertiStringa(testo) {
    Suggerimento: split(" ") + for + slice(0,1).toUpperCase() + slice(1) + join(" ").
 */
 
-/* SCRIVI QUI LA TUA RISPOSTA */
+function inizialiMaiuscole(frase) {
+    
+   const parole = frase.split(" "); 
+   
+   for (let i = 0; i < parole.length; i++) {
+        if (parole[i] === "") continue; 
+        parole[i] = parole[i].slice(0, 1).toUpperCase() + parole[i].slice(1);
+    }
+    return parole.join(" ");
+}
+console.log("ciao mondo:", inizialiMaiuscole("ciao mondo"));
 
 /* ESERCIZIO 9 — togliPrimoEUltimo
    Funzione togliPrimoEUltimo(testo): rimuovi primo e ultimo carattere.
    Usa slice. Prova con "EPICODE".
 */
 
-/* SCRIVI QUI LA TUA RISPOSTA */
+function togliPrimoEUltimo(testo) {
+    return testo.slice(1, -1); 
+}
+console.log("('EPICODE'):", togliPrimoEUltimo("EPICODE"));
 
 /* ESERCIZIO 10 — dammiCasuali
    Funzione dammiCasuali(n): ritorna un array di n numeri interi casuali tra 0 e 10 (inclusi).
    Usa Math.random e Math.floor.
 */
 
-/* SCRIVI QUI LA TUA RISPOSTA */
+function dammiCasuali(n) {
+    const risultati = [];
+    for (let i = 0; i < n; i++) {
+        risultati.push(Math.floor(Math.random() * 11));
+ }
+    return risultati;
+}
+console.log("Esercizio 10 — dammiCasuali(5):", dammiCasuali(5));
+
 
 /* --EXTRA-- ESERCIZIO 11 — etaInGiorni
    Funzione etaInGiorni(annoNascita, meseNascita, giornoNascita).
@@ -122,4 +148,11 @@ function invertiStringa(testo) {
    Stampa: "Hai X giorni!"
 */
 
-/* SCRIVI QUI LA TUA RISPOSTA */
+function etaInGiorni(annoNascita, meseNascita, giornoNascita) {
+    const oggi = new Date();
+    const nascita = new Date(annoNascita, meseNascita - 1, giornoNascita);
+    const millisecondi = oggi - nascita;
+    const giorni = Math.floor(millisecondi / (1000 * 60 * 60 * 24));
+    return giorni;
+}
+console.log("Esercizio 11 — Hai " + etaInGiorni(2000, 5, 15) + " giorni!");
